@@ -16,7 +16,6 @@ const handleController: HandlerController = (updateItem, controllerKey) => {
     const newController: any = {...controller}
     newController[controllerKey as keyof typeof newController] = updateItem.toLocaleLowerCase()
     setController(newController)
-    console.log(newController)
 }
 
   return (

@@ -4,7 +4,7 @@ export const Brush = ({handleController}: {handleController: HandlerController})
     const brushList = ['normal', 'thin', 'thick']
     const brushGrid = brushList.map((item) => {
         return (
-            <option>{item}</option>
+            <option key={item}>{item}</option>
         )
     })
 
