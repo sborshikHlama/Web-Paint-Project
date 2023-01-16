@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import './App.css';
 import { CanvasContainer } from '../components/canvas/CanvasContainer';
@@ -9,11 +8,11 @@ function App() {
 const [controller, setController] = useState({
     tool: "✏️" as Tool,
     weight: "normal" as LineWeight,
-    color: "black" as string
+    color: "black" as Color
 }) 
 
 const handleController: HandlerController = (updateItem, controllerKey) => {
-    const newController: any = {...controller}
+    const newController: ControllerState = {...controller}
     newController[controllerKey as keyof typeof newController] = updateItem.toLocaleLowerCase()
     setController(newController)
 }
