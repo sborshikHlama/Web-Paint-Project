@@ -1,6 +1,6 @@
 import { useDraw } from "./useDraw"
 
-export const CanvasContainer= ({controller}: {controller: ControllerState}) => {
+export const CanvasContainer= ({controller}: {controller: Controller}) => {
     const drawLine = ({prevPoint, currentPoint, ctx}: Draw) => {
         const { x: currX, y: currY} = currentPoint
 
@@ -46,7 +46,6 @@ export const CanvasContainer= ({controller}: {controller: ControllerState}) => {
             ref={canvasRef}
             width={750}
             height={750} 
-            style={{border: "4px solid gray"}}
             />
         </div>
     )

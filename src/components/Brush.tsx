@@ -1,5 +1,5 @@
 
-export const Brush = ({handleController}: {handleController: HandlerController}) => {
+export const Brush = ({handleStates}: {handleStates: HandleStates}) => {
 
     const brushList = ['normal', 'thin', 'thick']
     const brushGrid = brushList.map((item) => {
@@ -10,7 +10,7 @@ export const Brush = ({handleController}: {handleController: HandlerController})
     
     return (
         <div className="brush">
-            <select onChange = {(event) => handleController(event.target.value, 'weight')}>
+            <select onChange = {(event) => handleStates(event.target.value)}>
                 {brushGrid}
             </select>
         </div>

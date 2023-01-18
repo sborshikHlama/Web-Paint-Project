@@ -4,15 +4,15 @@ import { Colors } from "./Colors"
 import { Tools } from "./Tools"
 
 export const Header = (
-    {handleController, controller}: {
-        handleController: HandlerController, controller: ControllerState}
+    {handleStates, controller}: {
+        handleStates: HandleStates, controller: Controller}
     ) => {  
 
     return (
         <div className="header">
-            <Tools handleController={handleController} controller={controller}/>
-            <Brush handleController={handleController}/>
-            <Colors handleController={handleController}/>
+            <Tools handleStates={handleStates} controller={controller}/>
+            <Brush handleStates={handleStates}/>
+            <Colors handleStates={handleStates}/>
         </div>
     )
 }
