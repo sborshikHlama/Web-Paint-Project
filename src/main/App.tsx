@@ -2,43 +2,40 @@ import { useState } from 'react';
 import './App.css';
 import { CanvasContainer } from '../components/canvas/CanvasContainer';
 import { Header } from '../components/Header';
-import { strict } from 'assert/strict';
-import { checkIsColor } from '../components/Colors';
+import { checkIsTool } from '../types/TypeCheckFunctions';
+import { checkIsWeight } from '../types/TypeCheckFunctions';
+import { checkIsColor } from '../types/TypeCheckFunctions';
 
 function App() {
 
-const [controller, setController] = useState<ControllerState>({
-    tool: "✏️" as Tool,
-    weight: "normal" as LineWeight,
-    color: "black" as Color
-}) 
+const [tool, setTool] = useState<Tool>( "✏️")
+const [weight, setWeight] = useState<LineWeight>("normal")
+const [color, setColor] = useState<Color>("black")
 
-function checkIsTool (str: string): str is Tool {
-  return ['✏️', '🪣', '❌', '🎨'].includes(str)
+const controller: Controller = {
+  tool,
+  weight,
+  color
 }
 
-function checkIsWeight (str: string): str is LineWeight {
-  return ['thin' , 'normal' , 'thick'].includes(str)
-}
+const handleStates: HandleStates = (updateItem) => {
 
-const handleController: HandlerController = (updateItem, controllerKey) => {
-    if (controllerKey === 'tool' && checkIsTool(updateItem)) {
-      setController({ ...controller, tool: updateItem })
-    }
-
-    if (controllerKey === 'weight' && checkIsWeight(updateItem)) {
-      setController({ ...controller, weight: updateItem })
-    }
-
-    if (controllerKey === 'color' && checkIsColor(updateItem)) {
-      setController({ ...controller, color: updateItem })
-    }
+  if(checkIsTool(updateItem)) {
+    setTool(updateItem)
+  }
+  if(checkIsWeight(updateItem)) {
+    setWeight(updateItem)
+  }
+  if(checkIsColor(updateItem)) {
+    setColor(updateItem)
+  } 
+  console.log(controller)
 }
 
   return (
     <>
       <h1>Web Paint Project</h1>
-      <Header handleController={handleController} controller={controller}/>
+      <Header handleStates={handleStates} controller={controller}/>
       <CanvasContainer controller={controller}/>
     </>
   );
