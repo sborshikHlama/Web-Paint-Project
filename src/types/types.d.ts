@@ -14,12 +14,11 @@ type ColorHex = string
 
 type Color = ColorWord | ColorHex
 
-type ControllerState = {
+type Controller = {
   tool: Tool
   weight: LineWeight
   color: Color
 }
 
-type HandlerController = (updateItem: Tool | LineWeight | Color, controllerKey: keyof ControllerState) => void
-
 type PageCleaner = (value: boolean) => void
+type HandleStates = (updateItem: Tool | LineWeight | Color) => void
