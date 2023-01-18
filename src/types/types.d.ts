@@ -8,10 +8,11 @@ type Point = { x: number, y: number }
 
 type Tool = '✏️'| '🪣'| '❌'| '🎨'
 type LineWeight = 'thin' | 'normal' | 'thick'
-const reg = /^#((\w|\d){6})/
-type Color = 'red'| 'blue'| 'green'| 'yellow'|'pink'| 'black'| 'white'| 'brown'| 'purple'| 'gray'| 'orange' | reg
+type ColorWord = 'red'| 'blue'| 'green'| 'yellow'|'pink'| 'black'| 'white'| 'brown'| 'purple'| 'gray'| 'orange'
 
-type ContollerKeyProps = 'tool' | 'weight' | 'color'
+type ColorHex = string
+
+type Color = ColorWord | ColorHex
 
 type ControllerState = {
   tool: Tool
@@ -19,6 +20,6 @@ type ControllerState = {
   color: Color
 }
 
-type HandlerController = (updateItem: Tool | LineWeight | Color, controllerKey: ContollerKeyProps) => void
+type HandlerController = (updateItem: Tool | LineWeight | Color, controllerKey: keyof ControllerState) => void
 
 type PageCleaner = (value: boolean) => void

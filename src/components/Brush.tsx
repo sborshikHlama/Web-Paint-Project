@@ -7,7 +7,7 @@ export const Brush = ({handleController}: {handleController: HandlerController})
             <option key={item}>{item}</option>
         )
     })
-
+    
     return (
         <div className="brush">
             <select onChange = {(event) => handleController(event.target.value, 'weight')}>

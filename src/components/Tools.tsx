@@ -4,25 +4,22 @@ import { ChromePicker } from  'react-color'
 export const Tools = ({handleController, controller}:
      {handleController: HandlerController, controller: ControllerState}) => {
 
-    const [chromePicker, setChromePicker] = useState(1)
+    const [isPickerShown, setisPickerShown] = useState(false)
     
-    const colorBox = () => {
-        if (chromePicker % 2 === 0) {
-            return (
+    const renderPicker = () => isPickerShown && (
                 <ChromePicker color={controller.color} onChange={(color) => {
                     handleController(color.hex, "color")
             }}/>
             )
-        } return
-    }
+
 
     return (
         <div className="items">
             <button onClick={() => {handleController('✏️', 'tool'); handleController('black', 'color')}}>✏️</button>
             <button onClick={() => {handleController('❌', 'tool'); handleController('white', 'color')}}>❌</button>
-            <button onClick={() => {handleController('🎨', 'tool'); setChromePicker(chromePicker+1)}}>🎨</button>
+            <button onClick={() => {handleController('🎨', 'tool'); setisPickerShown(!isPickerShown)}}>🎨</button>
             <div className='color-box'>
-                {colorBox()}
+                {renderPicker()}
             </div>
         </div>
     )
