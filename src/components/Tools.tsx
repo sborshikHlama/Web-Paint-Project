@@ -1,26 +1,11 @@
-import { useState } from 'react'
-import { ChromePicker } from  'react-color'
-
-export const Tools = ({handleStates, controller}:
-     {handleStates: HandleStates, controller: Controller}) => {
-
-    const [isPickerShown, setisPickerShown] = useState(false)
+export const Tools = ({handleStates}:
+     {handleStates: HandleStates}) => {
     
-    const renderPicker = () => isPickerShown && (
-                <ChromePicker color={controller.color} onChange={(color) => {
-                    handleStates(color.hex)
-            }}/>
-            )
-
-
     return (
-        <div className="items">
+        <div className="tools">
             <button onClick={() => {handleStates('✏️'); handleStates('black')}}>✏️</button>
-            <button onClick={() => {handleStates('❌'); handleStates('white')}}>❌</button>
-            <button onClick={() => {handleStates('🎨'); setisPickerShown(!isPickerShown)}}>🎨</button>
-            <div className='color-box'>
-                {renderPicker()}
-            </div>
+            <button onClick={() => {handleStates('🧽'); handleStates('white')}}>🧽</button>
+            <button onClick={() => {handleStates('🗑️')}}>🗑️</button>
         </div>
     )
 }
