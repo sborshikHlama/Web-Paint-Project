@@ -1,26 +1,36 @@
-export function checkIsColorWord (str: string): str is ColorWord {
-    return ['red', 'blue', 'green', 'yellow','pink', 'black', 'white', 'brown', 'purple', 'gray', 'orange']
-        .includes(str)
-} 
+import { useState } from "react"
+import { ChromePicker } from "react-color"
 
-const reg = /^#((\w|\d){6})/
+export const Colors = ({handleStates, color}: {handleStates: HandleStates, color: Color}) => {
+    
+    // Part of code wich generates ChromPicker 
+    const [isPickerShown, setIsPickerShown] = useState<boolean>(false)
 
-export function checkIsColorHex (str: string): str is ColorHex {
-    return reg.test(str)
-}
+    const picker = isPickerShown && (
+        <div className="chrome-color-picker">
+             <ChromePicker color={color} onChange={(color) => {
+                    handleStates(color.hex)
+            }}/>
+        </div>)
 
-export const Colors = ({handleStates}: {handleStates: HandleStates}) => {
+    // Creating a line with colors
+    const colorList = ['red', 'blue', 'green', 'yellow', 'pink',
+     'black', 'white', 'brown', 'purple', 'gray', 'orange']
 
-const colorList = ['red', 'blue', 'green', 'yellow', 'pink', 'black', 'white', 'brown', 'purple', 'gray', 'orange']
-const colorGrid = colorList.map((color) => {
+    const colorFiller = colorList.map((color) => {
         return (
-            <div onClick={() => handleStates(color)} key={color}  className="color" style={{backgroundColor:`${color}`}}></div>
+            <button onClick={() => handleStates(color)} key={color}  className="color"
+             style={{backgroundColor:`${color}`}}></button>
         )
     })
 
     return (
-        <div className="color-grid">
-            {colorGrid}
+        <>
+        <div className="color-container">
+        <button className="picker-button" onClick={() => {setIsPickerShown(!isPickerShown)}}>🎨</button>
+            {colorFiller}
         </div>
+            {picker}
+        </>
     )
 }
