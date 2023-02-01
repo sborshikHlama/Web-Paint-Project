@@ -3,9 +3,7 @@ export const Brush = ({handleStates}: {handleStates: HandleStates}) => {
 
     const brushList = ['normal', 'thin', 'thick']
     const brushGrid = brushList.map((item) => {
-        return (
-            <option key={item}>{item}</option>
-        )
+        return <option key={item}>{item}</option>
     })
     
     return (
