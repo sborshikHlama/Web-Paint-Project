@@ -1,6 +1,5 @@
-
 export function checkIsTool (str: string): str is Tool {
-    return ['✏️', '🪣', '❌', '🎨'].includes(str)
+    return ['✏️', '🧽', '🗑️'].includes(str)
   }
   
 export function checkIsWeight (str: string): str is LineWeight {
