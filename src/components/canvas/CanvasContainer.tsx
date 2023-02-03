@@ -1,5 +1,6 @@
-import { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useDraw } from "./useDraw"
+
 
 export const CanvasContainer= ({weight, color, tool, handleStates}: {
     weight: LineWeight, color: Color, tool: Tool, handleStates: HandleStates}) => {
@@ -45,13 +46,13 @@ export const CanvasContainer= ({weight, color, tool, handleStates}: {
         ctx.lineWidth = lineWidth
 
         // Color configuration
-        const lineColor = color
+    const lineColor = color
 
         // Drawing process
         let startPoint = prevPoint ?? currentPoint
         ctx.beginPath()
         ctx.strokeStyle = lineColor
-        ctx.moveTo(startPoint.x, startPoint.y)
+        ctx.moveTo(startPoint.x, startPoint.y) 
         ctx.lineTo(currX, currY)
         ctx.stroke()
         ctx.fillStyle = lineColor
@@ -61,6 +62,34 @@ export const CanvasContainer= ({weight, color, tool, handleStates}: {
     }
 
     const {canvasRef, onMouseDown} = useDraw(drawLine)
+
+    // function saveImage(e: React.MouseEvent<HTMLElement>) {
+    //     // let link = e.currentTarget 
+    //     // link?.setAttribute('download', 'canvas.png')
+    //     // let image = canvasRef.current?.toDataURL('image/png') ??  ' '
+    //     // link.setAttribute('href', image)
+    //     setImage(canvasRef.current?.toDataURL('image/png') ??  ' ')
+    // }
+
+
+    const saveImage = async () => {
+        const dataUrl = canvasRef.current?.toDataURL().split(',')[1];
+        console.log(dataUrl)
+        let data = { image: dataUrl };
+        const response = await fetch('http://localhost:5000/save-image', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            body: JSON.stringify(data)
+            });
+            console.log(response);
+        };
+
+    
+
+
     
     return (
         <div className="canvas">
@@ -70,6 +99,8 @@ export const CanvasContainer= ({weight, color, tool, handleStates}: {
             width={750}
             height={750} 
             />
+            <button id="save-button" onClick={saveImage}>📥</button>
+            {/* <a id = 'download_image_link' href='download_link' onClick={saveImage}>Download</a> */}
         </div>
     )
 }
