@@ -10,10 +10,7 @@ export const CanvasContainer= ({weight, color, tool, handleStates}: {
         //  Function that clears page
         function canvasCleaner() {
             const canvas = canvasRef?.current
-            // if(!canvas) return
-
-            // if(!ctx) return
-            // canvas && ctx?.clearRect(0, 0, canvas.width, canvas.height)
+        
             if(tool == '🗑️' ) {
                 canvas
                     ?.getContext('2d')
