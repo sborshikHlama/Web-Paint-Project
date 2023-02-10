@@ -1,35 +1,34 @@
-const cors = require('cors')
 const fs = require('fs');
-const express = require('express');
-const bodyParser = require('body-parser');
+const Koa = require('koa')
+const bodyParser = require('koa-bodyparser');
+const Router = require('koa-router');
+const cors = require('@koa/cors')
 
-const app = express();
+const app = new Koa()
+const router = new Router()
+const PORT = 5000
 
-app.use(bodyParser.json());
+app
+    .use(bodyParser())
+    .use(cors())
 
-app.use(cors({
-    origin: "http://localhost:3000"
-}))
-
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-//   });
-  
-app.post('/save-image', (req, res) => {
-    
-    const data = req.body.image
-    const buffer = Buffer.from(data, 'base64');
-
-    fs.writeFile('images/image.png', buffer, (err) => {
-        if (err) {
-            throw  res.send('Ups, something went wrong');
-        }
-        return res.send('SUCCES');
-    });
+router.post('/save-image', async (ctx, next) => {
+    try {
+        const data = ctx.request.body.image;
+        const buffer = Buffer.from(data, 'base64'); 
+        await fs.promises.writeFile('images/image.png', buffer);
+        ctx.response.status = 200;
+        ctx.response.body = { message: 'Image saved successfully' };
+    } catch (err) {
+        ctx.response.status = 500;
+        ctx.response.body = { message: 'Failed to save image', error: err.message };
+    }
 });
 
-app.listen(5000, () => {
-    console.log('Server is running on port 5000');
+app
+    .use(router.routes())
+    .use(router.allowedMethods());
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
