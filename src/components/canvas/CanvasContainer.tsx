@@ -8,10 +8,10 @@ export const CanvasContainer= ({weight, color, tool, handleStates}: {
     useEffect(() => {
 
         //  Function that clears page
-        function canvasCleaner() {
+        function clearCanvas() {
             const canvas = canvasRef?.current
         
-            if(tool == '🗑️' ) {
+            if(tool === '🗑️' ) {
                 canvas
                     ?.getContext('2d')
                     ?.clearRect(0, 0, canvas.width, canvas.height)
@@ -19,7 +19,7 @@ export const CanvasContainer= ({weight, color, tool, handleStates}: {
             handleStates('✏️')   
         }
     
-        canvasCleaner()
+        clearCanvas()
     }, [tool])
 
     //Funtion that draws line 
