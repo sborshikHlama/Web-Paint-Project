@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react"
 import { useDraw } from "./useDraw"
 
+interface CanvasContainerPorps {
+    weight: LineWeight
+    color: Color
+    tool: Tool
+    handleStates: HandleStates
+}
 
-export const CanvasContainer= ({weight, color, tool, handleStates}: {
-    weight: LineWeight, color: Color, tool: Tool, handleStates: HandleStates}) => {
+export const CanvasContainer= ({weight, color, tool, handleStates}: CanvasContainerPorps) => {
 
     useEffect(() => {
 

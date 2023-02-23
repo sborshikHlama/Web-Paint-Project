@@ -1,9 +1,14 @@
 import { useState } from "react"
 import { ChromePicker } from "react-color"
 
-export const Colors = ({handleStates, color}: {handleStates: HandleStates, color: Color}) => {
+interface ColorsPorps {
+    handleStates: HandleStates
+    color: Color
+}
+
+export const Colors = ({handleStates, color}: ColorsPorps) => {
     
-    // Part of code wich generates ChromPicker 
+    // Part of code wich generates ChromePicker 
     const [isPickerShown, setIsPickerShown] = useState<boolean>(false)
 
     const picker = isPickerShown && (

@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react"
 
 export const Brush = ({handleStates}: {handleStates: HandleStates}) => {
 
@@ -8,7 +9,7 @@ export const Brush = ({handleStates}: {handleStates: HandleStates}) => {
     
     return (
         <div className="brush">
-            <select onChange = {(event) => handleStates(event.target.value)}>
+            <select  onChange={(event: ChangeEvent<HTMLSelectElement>) => handleStates(event.target.value)}>
                 {brushGrid}
             </select>
         </div>
