@@ -20,11 +20,23 @@ export const CanvasContainer= ({weight, color, tool, handleStates}: CanvasContai
                 canvas
                     ?.getContext('2d')
                     ?.clearRect(0, 0, canvas.width, canvas.height)
+                    handleStates('✏️')   
             }
-            handleStates('✏️')   
+        }
+
+        function eraser() {
+            const canvas = canvasRef?.current
+            const context = canvas?.getContext('2d')
+
+            if(tool === '🧽') {
+                context!.globalCompositeOperation = 'destination-out'
+            } else {
+                context!.globalCompositeOperation = 'source-over'
+            }
         }
     
         clearCanvas()
+        eraser()
     }, [tool])
 
     //Funtion that draws line 
@@ -32,7 +44,7 @@ export const CanvasContainer= ({weight, color, tool, handleStates}: CanvasContai
         const { x: currX, y: currY} = currentPoint
 
         // Line width configuration
-        let lineWidth = 2
+        let lineWidth: number = 2
 
         switch(weight) {
             case "thin":
@@ -88,12 +100,7 @@ export const CanvasContainer= ({weight, color, tool, handleStates}: CanvasContai
             body: JSON.stringify(data)
             });
             console.log(response);
-    };
-
-    
-
-
-    
+    };    
     return (
         <div className="canvas">
         <canvas
