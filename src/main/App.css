@@ -17,7 +17,7 @@ button {
 
 .header {
   display: flex;
-  flex-flow:  row nowrap;
+  flex-flow: row nowrap;
   background-color: lightgray;
   align-items: center;
   justify-content: space-around;
@@ -27,8 +27,7 @@ button {
   border-color: gray;
 }
 
-.tools
- {
+.tools {
   padding: 5px;
   width: 200px;
   text-align: center;
@@ -60,4 +59,3 @@ button {
   border-color: gray;
   border-width: 4px;
 }
-
